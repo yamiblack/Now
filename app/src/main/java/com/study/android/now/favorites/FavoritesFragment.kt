@@ -5,24 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.study.android.now.databinding.FragmentFavoritesBinding
 
 class FavoritesFragment : Fragment() {
 
-    private lateinit var favoritesViewModel: FavoritesViewModel
-    private var mbinding: FragmentFavoritesBinding? = null
-    private val binding get() = mbinding!!
+    private val favoritesViewModel: FavoritesViewModel by activityViewModels()
+    private var mBinding: FragmentFavoritesBinding? = null
+    private val binding get() = mBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        favoritesViewModel =
-            ViewModelProvider(this)[FavoritesViewModel::class.java]
-        mbinding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        mBinding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
         favoritesViewModel.text.observe(viewLifecycleOwner, Observer {
             binding.textView.text = it
@@ -32,6 +30,6 @@ class FavoritesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mbinding = null
+        mBinding = null
     }
 }
