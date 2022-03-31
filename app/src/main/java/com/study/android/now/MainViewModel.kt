@@ -9,13 +9,4 @@ import kotlinx.coroutines.launch
 
 class MainViewModel: ViewModel() {
 
-    private val mIsLoading = MutableStateFlow(true)
-    val isLoading = mIsLoading.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            delay(1500)
-            mIsLoading.value = false
-        }
-    }
 }
